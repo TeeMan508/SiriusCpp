@@ -3,4 +3,4 @@ project(Task1_3)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Task1_3 main.cpp read_file.h read_file.cpp dot_checker.h dot_checker.cpp parse_arguments.h parse_arguments.cpp)
+add_executable(Task1_3 main.cpp read_file.h read_file.cpp dot_checker.h dot_checker.cpp parse_arguments.h parse_arguments.cpp ../Task4/main.cpp ../Task5/main.cpp)
