@@ -34,7 +34,8 @@ void List::print_list() {
         cout << "[";
         while (p != nullptr){
             if ((*p).next == nullptr){
-                cout << (*p).data << "]";
+                cout << (*p).data << "]" << endl;
+                return;
             }
             else {
                 cout << (*p).data << ", ";
@@ -66,21 +67,21 @@ void List::pop(std::string arg) {
     if (List::is_empty()) return;
     if ((*first_element).data == arg){
        List::remove_first();
-       return;
     }
     if ((*last_element).data == arg){
        List::remove_last();
-       return;
     }
     ListElement* p = first_element;
-    while (p != nullptr){
-        if ((*p).data == arg){
-            ListElement* buf = p;
-            p = (*buf).next;
-            delete buf;
+    ListElement* next_p = (*p).next;
+    while (next_p != nullptr){
+        if ((*next_p).data != arg){
+            p = (*p).next;
+            next_p = (*next_p).next;
         }
         else {
-            p = (*p).next;
+            (*p).next = (*next_p).next;
+            delete next_p;
+            next_p = (*p).next;
         }
     }
 

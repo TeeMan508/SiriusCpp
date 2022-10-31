@@ -1,9 +1,21 @@
 #include "list.h"
-
-int main(){
+#include <fstream>
+#include <iostream>
+int main(int argc, char **argv){
     List l;
-    l.push_back("1");
-    l.push_back("123");
+
+    string buf;
+    ifstream file;
+    file.open(argv[1]);
+    while (!file.eof()){
+        file >> buf;
+        l.push_back(buf);
+    }
+    file.close();
+    cout << "Imported list: ";
+    l.print_list();
+    l.pop((*l.last_element).data);
+    cout << "Popped list: ";
     l.print_list();
     return 0;
 }
