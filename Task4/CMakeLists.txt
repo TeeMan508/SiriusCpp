@@ -3,4 +3,4 @@ project(Task4)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Task4 main.cpp FindMinPath.h FindMinPath.cpp)
+add_executable(Task4 main.cpp load_png/lodepng.h load_png/lodepng.cpp FindMinPath.h FindMinPath.cpp ArgErrorsHandler.h ArgErrorsHandler.cpp)
