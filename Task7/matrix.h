@@ -147,11 +147,14 @@ public:
             //cout << sqrt((ac_Rk.transpose()*ac_Rk).data[0][0] / (ac_R0.transpose()*ac_R0).data[0][0]) <<endl;
             r_buf = Rk;
             z_buf = Zk;
-            Alphak = ((Rk.transpose()*Rk).data[0][0]) / (((A*Zk).transpose()*(A*Zk)).data[0][0]);
+            Type Rk_norm = (Rk.transpose()*Rk).data[0][0];
+            Matrix<Type> AZk = A*Zk;
+
+            Alphak = (Rk_norm) / ((AZk.transpose()*AZk).data[0][0]);
             Xk = Xk + Zk*Alphak;
-            Rk = Rk - A.transpose()*A*Zk * Alphak;
-            ac_Rk = ac_Rk - A*Zk*Alphak;
-            Betak = ((Rk.transpose()*Rk).data[0][0]) / ((r_buf.transpose()*r_buf).data[0][0]);
+            Rk = Rk - A.transpose()*AZk * Alphak;
+            ac_Rk = ac_Rk - AZk*Alphak;
+            Betak = (Rk_norm) / ((r_buf.transpose()*r_buf).data[0][0]);
             Zk = Rk + z_buf * Betak;
 
 //            for (int i=0; i<Xk.m; i++){
