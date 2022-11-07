@@ -104,8 +104,8 @@ void polynom::read_string(string arg) {
 
 void polynom::calculate(std::string arg) {
     string test = arg;
-    regex regular("([\\w\\s-\+\*]+)"
-                  "([\\d\\s\{\}\,]*)"
+    regex regular("([\\w\\s\\-\\+\\*]+)"
+                  "([\\d\\s\\{\\}\\,]*)"
     );
     cmatch expression_res;
     try {
