@@ -12,7 +12,7 @@ int main(int argc, char **argv){
     A.read_file(argv[1]);
     B.read_file(argv[2]);
     X0.read_file(argv[3]);
-    Matrix<double> C = A.solve(A,B,X0);
+    Matrix<double> C = solve(A,B,X0);
 
     for (int i=0; i<C.m; i++){
         for (int j=0; j<C.n; j++){

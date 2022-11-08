@@ -130,8 +130,9 @@ public:
         result.n = m;
         return result;
     }
-    //Type dot(Matrix<Type> x, Matrix<Type> y);
-    Matrix<Type> solve(Matrix<Type> A, Matrix<Type> B, Matrix<Type> X0){
+
+    template<class UserMatrix>
+    friend Matrix<Type> solve(UserMatrix& A, Matrix<Type>& B, Matrix<Type>& X0){
         Matrix<Type> Rk = A.transpose()*B - A.transpose()*A*X0;
         Matrix<Type> ac_R0 = B - A*X0;
         Matrix<Type> ac_Rk = ac_R0;
@@ -147,14 +148,13 @@ public:
             //cout << sqrt((ac_Rk.transpose()*ac_Rk).data[0][0] / (ac_R0.transpose()*ac_R0).data[0][0]) <<endl;
             r_buf = Rk;
             z_buf = Zk;
-            Type Rk_norm = (Rk.transpose()*Rk).data[0][0];
             Matrix<Type> AZk = A*Zk;
-
+            Type Rk_norm =(Rk.transpose()*Rk).data[0][0];
             Alphak = (Rk_norm) / ((AZk.transpose()*AZk).data[0][0]);
             Xk = Xk + Zk*Alphak;
             Rk = Rk - A.transpose()*AZk * Alphak;
             ac_Rk = ac_Rk - AZk*Alphak;
-            Betak = (Rk_norm) / ((r_buf.transpose()*r_buf).data[0][0]);
+            Betak = ((Rk.transpose()*Rk).data[0][0]) / ((r_buf.transpose()*r_buf).data[0][0]);
             Zk = Rk + z_buf * Betak;
 
 //            for (int i=0; i<Xk.m; i++){
